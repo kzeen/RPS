@@ -15,17 +15,19 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let winner;
+    let roundOutcome;
+
+    console.log(`You played: ${playerSelection} - Computer played: ${computerSelection}`);
 
     if (playerSelection === computerSelection) {
-        winner = "Tie";
+        roundOutcome = "It's a tie!";
     } else if ((playerSelection === "Rock" && computerSelection === "Paper")
      || (playerSelection === "Paper" && computerSelection === "Scissors") 
      || (playerSelection === "Scissors" && computerSelection === "Rock")) {
-        winner = "Computer";
+        roundOutcome = `You lose! ${computerSelection} beats ${playerSelection}`;
      } else {
-        winner = "Player";
+        roundOutcome = `You win! ${playerSelection} beats ${computerSelection}`;
      }
 
-     return winner;
+     return roundOutcome;
 }
