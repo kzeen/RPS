@@ -31,3 +31,40 @@ function playRound(playerSelection, computerSelection) {
 
      return roundOutcome;
 }
+
+function displayWinner(playerScore, computerScore) {
+    let result = `Your score: ${playerScore} - Computer score: ${computerScore}\n`;
+    if (playerScore === computerScore) {
+        result += "It's a tie!";
+    } else if (playerScore > computerScore) {
+        result += "You win!";
+    } else {
+        result += "You lose!";
+    }
+
+    console.log(result);
+}
+
+function playGame() {
+    let playerChoice, computerChoice, outcome;
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {        
+        playerChoice = getPlayerChoice();
+        computerChoice = getComputerChoice();
+        outcome = playRound(playerChoice, computerChoice);
+
+        console.log(outcome);
+
+        if (outcome.slice(4, 7) === "win") {
+            playerScore++;
+        } else if (outcome.slice(4, 8) === "lose") {
+            computerScore++;
+        }
+    }
+
+    displayWinner(playerScore, computerScore);
+}
+
+playGame();
