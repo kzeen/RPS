@@ -13,3 +13,19 @@ function getPlayerChoice() {
     playerChoice = playerChoice[0].toUpperCase() + playerChoice.slice(1).toLowerCase();
     return playerChoice;
 }
+
+function playRound(playerSelection, computerSelection) {
+    let winner;
+
+    if (playerSelection === computerSelection) {
+        winner = "Tie";
+    } else if ((playerSelection === "Rock" && computerSelection === "Paper")
+     || (playerSelection === "Paper" && computerSelection === "Scissors") 
+     || (playerSelection === "Scissors" && computerSelection === "Rock")) {
+        winner = "Computer";
+     } else {
+        winner = "Player";
+     }
+
+     return winner;
+}
