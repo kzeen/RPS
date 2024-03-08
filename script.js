@@ -8,27 +8,35 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    let playerChoice = prompt("Enter your play:");
-    // Format user input to only capitalize first letter
-    playerChoice = playerChoice[0].toUpperCase() + playerChoice.slice(1).toLowerCase();
-    return playerChoice;
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            playGame(button.textContent);
+        });
+    });
 }
 
 function playRound(playerSelection, computerSelection) {
     let roundOutcome;
+    const div = document.querySelector(".display-outcome");
+    const p = document.createElement("p");
 
     console.log(`You played: ${playerSelection} - Computer played: ${computerSelection}`);
+    div.textContent = `You played: ${playerSelection} - Computer played: ${computerSelection}`;
 
     if (playerSelection === computerSelection) {
         roundOutcome = "It's a tie!";
+        p.textContent = "It's a tie!";
     } else if ((playerSelection === "Rock" && computerSelection === "Paper")
      || (playerSelection === "Paper" && computerSelection === "Scissors") 
      || (playerSelection === "Scissors" && computerSelection === "Rock")) {
         roundOutcome = `You lose! ${computerSelection} beats ${playerSelection}`;
+        p.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
      } else {
         roundOutcome = `You win! ${playerSelection} beats ${computerSelection}`;
+        p.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
      }
-
+     div.appendChild(p);
      return roundOutcome;
 }
 
@@ -45,26 +53,22 @@ function displayWinner(playerScore, computerScore) {
     console.log(result);
 }
 
-function playGame() {
-    let playerChoice, computerChoice, outcome;
+function playGame(currentPlayerChoice) {
+    const playerChoice = currentPlayerChoice;
+    const computerChoice = getComputerChoice();
+    const outcome = playRound(playerChoice, computerChoice);
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {        
-        playerChoice = getPlayerChoice();
-        computerChoice = getComputerChoice();
-        outcome = playRound(playerChoice, computerChoice);
+    console.log(outcome);
 
-        console.log(outcome);
-
-        if (outcome.slice(4, 7) === "win") {
-            playerScore++;
-        } else if (outcome.slice(4, 8) === "lose") {
-            computerScore++;
-        }
+    if (outcome.slice(4, 7) === "win") {
+        playerScore++;
+    } else if (outcome.slice(4, 8) === "lose") {
+        computerScore++;
     }
 
     displayWinner(playerScore, computerScore);
 }
 
-playGame();
+getPlayerChoice();
