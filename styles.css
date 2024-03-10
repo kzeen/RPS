@@ -1,0 +1,24 @@
+* {
+    color: beige;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    background-color: #4C1C24;
+    text-align: center;
+}
+
+button {
+    color: black;
+    font-weight: bold;
+    margin-right: 20px;
+    padding: 10px 20px;
+}
+
+p {
+    font-size: 22px;
+}
+
+.hidden {
+    display: none;
+}
